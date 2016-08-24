@@ -21,9 +21,9 @@ produces:
 
 paths:
   /info:
-    post:
-      summary: Post in chatroom
-      operationId: postMessage
+    get:
+      summary: Get plugin info
+      operationId: info
       parameters:
         - name: message
           in: body
