@@ -3,4 +3,67 @@ info:
   version: 1.0.0
   title: SLAPI Plugin
   description: Basic API needs of a SLAPI Plugin
-paths: {}
+  contact:
+    name: SLAPI Team
+    url: https://github.com/ImperialLabs
+  license:
+    name: MIT
+    url: https://github.com/ImperialLabs/slapi-plugin-swagger/blob/master/LICENSE
+host: "localhost:8100"
+basePath: /v1
+schemes:
+  - http
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+
+paths:
+  /info:
+    post:
+      summary: Post in chatroom
+      operationId: postMessage
+      parameters:
+        - name: message
+          in: body
+          description: message to post
+          required: true
+          schema:
+            $ref: '#/definitions/info'
+      tags:
+        - chat
+      responses:
+        "200":
+          description: message response
+          schema:
+            type: array
+            items:
+              $ref: '#/definitions/info'
+        default:
+          description: unexpected error
+          schema:
+            $ref: '#/definitions/error'
+definitions:
+  info:
+    required:
+      - commands
+    properties:
+      commands:
+        properties:
+          commandarg1:
+            type: string
+          commandarg2:
+            type: string
+          commandarg3:
+            type: string
+  error:
+    required:
+      - code
+      - message
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
